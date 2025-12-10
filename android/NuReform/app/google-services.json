@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "72540671696",
+    "project_id": "nureform-6951c",
+    "storage_bucket": "nureform-6951c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72540671696:android:9ca3a54b460f92c358d8d5",
+        "android_client_info": {
+          "package_name": "com.example.nureform"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT4rv2hl_cuq8hzPKAhFP9Lixupav9Q7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

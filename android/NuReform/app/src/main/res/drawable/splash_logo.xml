@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Placeholder - Replace this file with your actual splash image -->
+    <path
+        android:fillColor="#FF6200EE"
+        android:pathData="M100,100m-80,0a80,80 0,1 1,160 0a80,80 0,1 1,-160 0" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,60L100,140M60,100L140,100"
+        android:strokeWidth="10"
+        android:strokeColor="#FFFFFF" />
+</vector>
+

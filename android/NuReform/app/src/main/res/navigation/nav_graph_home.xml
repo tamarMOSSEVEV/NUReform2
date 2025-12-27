@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.nureform.ui.home.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_addNurseFragment"
+            app:destination="@id/addNurseFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_deleteNurseFragment"
+            app:destination="@id/deleteNurseFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_nursesListFragment"
+            app:destination="@id/nursesListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addNurseFragment"
+        android:name="com.example.nureform.ui.nurses.AddNurseFragment"
+        android:label="@string/add_nurses"
+        tools:layout="@layout/fragment_add_nurse" />
+
+    <fragment
+        android:id="@+id/deleteNurseFragment"
+        android:name="com.example.nureform.ui.nurses.DeleteNurseFragment"
+        android:label="@string/delete_nurse"
+        tools:layout="@layout/fragment_delete_nurse" />
+
+    <fragment
+        android:id="@+id/nursesListFragment"
+        android:name="com.example.nureform.ui.nurses.NursesListFragment"
+        android:label="@string/nurses_details"
+        tools:layout="@layout/fragment_nurses_list" />
+
+</navigation>
+

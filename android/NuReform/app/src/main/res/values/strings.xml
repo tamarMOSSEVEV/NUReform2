@@ -1,14 +1,54 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">NuReform</string>
-    <string name="login_title">Welcome Back</string>
-    <string name="login_subtitle">Login to continue</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="dont_have_account">Don\'t have an account?</string>
-    <string name="register">Register</string>
-    <string name="logout">Logout</string>
-    <string name="welcome_user">Welcome, %s!</string>
-    <string name="email_label">Email:</string>
-    <string name="role_label">Role: %s</string>
+    <string name="app_tagline">מערכת לניהול צוות סיעוד</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">ברוכים השבים</string>
+    <string name="login_subtitle">התחבר כדי להמשיך</string>
+    <string name="email">אימייל</string>
+    <string name="password">סיסמה</string>
+    <string name="login">התחבר</string>
+    <string name="dont_have_account">אין לך חשבון?</string>
+    <string name="register">הירשם</string>
+
+    <!-- Home Screen -->
+    <string name="logout">התנתק</string>
+    <string name="welcome_user">שלום, %s!</string>
+    <string name="email_label">אימייל:</string>
+    <string name="role_label">תפקיד: %s</string>
+
+    <!-- Manager Menu Buttons -->
+    <string name="add_nurses">הוספת אחיות</string>
+    <string name="nurses_details">פרטים של כל אחות</string>
+    <string name="nurses_requests">בקשות אחיות מהשיבוץ</string>
+    <string name="delete_nurse">מחיקת אחות</string>
+    <string name="weekly_shifts">משמרות של האחיות השבוע</string>
+
+    <!-- Common -->
+    <string name="hello">שלום</string>
+    <string name="manager">מנהל</string>
+    <string name="nurse">אחות</string>
+    <string name="back">חזור</string>
+    <string name="refresh">רענן</string>
+
+    <!-- Nurses List Screen -->
+    <string name="no_nurses_found">לא נמצאו אחיות</string>
+    <string name="add_nurses_to_see_list">הוסף אחיות כדי לראות אותן כאן</string>
+
+    <!-- Add Nurse Screen -->
+    <string name="id_number">תעודת זהות</string>
+    <string name="name">שם</string>
+    <string name="phone">טלפון</string>
+    <string name="add_nurse_button">הוסף אחות</string>
+
+    <!-- Delete Nurse Screen -->
+    <string name="check_nurse">בדוק אחות</string>
+    <string name="delete_warning">אזהרה: מחיקת אחות היא פעולה בלתי הפיכה. אנא ודא שהזנת תעודת זהות נכונה.</string>
+
+    <!-- Errors -->
+    <string name="error_email_required">אימייל נדרש</string>
+    <string name="error_password_required">סיסמה נדרשת</string>
+    <string name="error_password_length">הסיסמה חייבת להכיל לפחות 6 תווים</string>
+    <string name="success_login">התחברת בהצלחה, %s!</string>
 </resources>

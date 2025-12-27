@@ -29,9 +29,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
-            viewModel.login(email, password)
+            viewModel.login(
+                email = email,
+                password = password,
+            )
         }
-
     }
 
     private fun observeAuthState() {
@@ -49,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
 
                     is AuthState.Success -> {
                         showLoading(false)
-                        showSuccess(state.message)
                         navigateToHome()
                     }
 
@@ -88,10 +89,6 @@ class LoginActivity : AppCompatActivity() {
                 showError(message)
             }
         }
-    }
-
-    private fun showSuccess(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showError(message: String) {

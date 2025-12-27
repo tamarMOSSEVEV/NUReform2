@@ -14,11 +14,11 @@ object Constants {
     // Validation
     const val MIN_PASSWORD_LENGTH = 6
 
-    // Messages
-    const val ERROR_EMAIL_REQUIRED = "Email is required"
-    const val ERROR_PASSWORD_REQUIRED = "Password is required"
-    const val ERROR_PASSWORD_LENGTH = "Password must be at least 6 characters"
+    // Error Messages - Now using string resource references
+    const val ERROR_EMAIL_REQUIRED = "error_email_required"
+    const val ERROR_PASSWORD_REQUIRED = "error_password_required"
+    const val ERROR_PASSWORD_LENGTH = "error_password_length"
     const val SUCCESS_REGISTRATION = "Registration successful!"
-    const val SUCCESS_LOGIN_PREFIX = "Welcome back, "
+    const val SUCCESS_LOGIN_PREFIX = "success_login"
 }
 

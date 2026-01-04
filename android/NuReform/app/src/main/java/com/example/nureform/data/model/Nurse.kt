@@ -5,6 +5,7 @@ data class Nurse(
     val name: String = "",
     val phone: String = "",
     val email: String = "",
+    val userId: String = "", // Firebase Auth UID
     val createdAt: Long = System.currentTimeMillis()
 )
 

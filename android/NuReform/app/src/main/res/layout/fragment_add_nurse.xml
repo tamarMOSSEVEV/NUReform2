@@ -137,20 +137,21 @@
             <!-- Add Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdd"
-                style="@style/Widget.NuReform.Button.Secondary"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="@string/add_nurse_button"
-                android:textSize="16sp" />
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/add"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                style="@style/Widget.NuReform.Button" />
 
             <!-- Progress Bar -->
             <ProgressBar
                 android:id="@+id/progressBar"
-                style="@style/Widget.NuReform.ProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
                 android:visibility="gone"
                 tools:visibility="visible" />
 

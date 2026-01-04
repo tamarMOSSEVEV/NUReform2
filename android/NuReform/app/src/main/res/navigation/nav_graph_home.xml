@@ -29,6 +29,27 @@
         <action
             android:id="@+id/action_homeFragment_to_nursesListFragment"
             app:destination="@id/nursesListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chooseShiftsFragment"
+            app:destination="@id/chooseShiftsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_scheduleViewFragment"
+            app:destination="@id/scheduleViewFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+22        <action
+            android:id="@+id/action_homeFragment_to_nursesRequestsFragment"
+            app:destination="@id/nursesRequestsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -47,7 +68,44 @@
         android:id="@+id/nursesListFragment"
         android:name="com.example.nureform.ui.nurses.NursesListFragment"
         android:label="@string/nurses_details"
-        tools:layout="@layout/fragment_nurses_list" />
+        tools:layout="@layout/fragment_nurses_list">
+
+        <argument
+            android:name="user"
+            app:argType="com.example.nureform.data.model.User"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chooseShiftsFragment"
+        android:name="com.example.nureform.ui.shifts.ChooseShiftsFragment"
+        android:label="@string/choose_weekly_shifts"
+        tools:layout="@layout/fragment_choose_shifts" />
+
+    <fragment
+        android:id="@+id/scheduleViewFragment"
+        android:name="com.example.nureform.ui.schedule.ScheduleViewFragment"
+        android:label="schedule_view_fragment"
+        tools:layout="@layout/fragment_schedule_view">
+
+        <argument
+            android:name="showAllNurses"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+        <argument
+            android:name="nurseName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nursesRequestsFragment"
+        android:name="com.example.nureform.ui.nursesrequests.NursesRequestsFragment"
+        android:label="@string/nurses_requests"
+        tools:layout="@layout/fragment_nurses_requests" />
 
 </navigation>
 

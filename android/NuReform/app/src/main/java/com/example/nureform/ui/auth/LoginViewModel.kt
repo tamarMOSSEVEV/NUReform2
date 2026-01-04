@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nureform.R
 import com.example.nureform.data.repository.AuthRepository
-import com.example.nureform.utils.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -53,7 +52,7 @@ class LoginViewModel(
                 _authState.value = AuthState.Error(context.getString(R.string.error_password_required))
                 return false
             }
-            password.length < Constants.MIN_PASSWORD_LENGTH -> {
+            password.length < 6 -> {
                 _authState.value = AuthState.Error(context.getString(R.string.error_password_length))
                 return false
             }

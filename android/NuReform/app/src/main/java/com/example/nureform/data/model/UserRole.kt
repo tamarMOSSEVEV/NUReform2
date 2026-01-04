@@ -1,6 +1,10 @@
 package com.example.nureform.data.model
 
-enum class UserRole(val value: String) {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+enum class UserRole(val value: String) : Parcelable {
     NURSE("nurse"),
     MANAGER("manager");
 

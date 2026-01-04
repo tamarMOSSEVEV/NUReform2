@@ -36,8 +36,6 @@
             android:orientation="vertical">
 
             <!-- Header Section -->
-
-            <!-- Main Content -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,215 +92,14 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!-- Grid of Cards -->
-                <LinearLayout
+                <!-- Grid of Action Cards -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvActionCards"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Row 1: Add Nurses + Nurses Details -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardAddNurses"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="2dp"
-                            app:rippleColor="@color/secondary_turquoise_light">
-
-                            <LinearLayout
-                                android:id="@+id/btnAddNurses"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="16dp">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:src="@android:drawable/ic_input_add"
-                                    app:tint="@color/secondary_turquoise" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/add_nurses"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardNursesDetails"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="2dp"
-                            app:rippleColor="@color/secondary_turquoise_light">
-
-                            <LinearLayout
-                                android:id="@+id/btnNursesDetails"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="16dp">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:src="@android:drawable/ic_menu_info_details"
-                                    app:tint="@color/secondary_turquoise" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/nurses_details"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                    </LinearLayout>
-
-                    <!-- Row 2: Nurses Requests + Delete Nurse -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardNursesRequests"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="2dp"
-                            app:rippleColor="@color/secondary_turquoise_light">
-
-                            <LinearLayout
-                                android:id="@+id/btnNursesRequests"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="16dp">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:src="@android:drawable/ic_menu_recent_history"
-                                    app:tint="@color/secondary_turquoise" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/nurses_requests"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardDeleteNurse"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="2dp"
-                            app:rippleColor="@color/error">
-
-                            <LinearLayout
-                                android:id="@+id/btnDeleteNurse"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="16dp">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:src="@android:drawable/ic_menu_delete"
-                                    app:tint="@color/error" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/delete_nurse"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                    </LinearLayout>
-
-                    <!-- Row 3: Weekly Shifts (Full Width) -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardWeeklyShifts"
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
-                        app:rippleColor="@color/secondary_turquoise_light">
-
-                        <LinearLayout
-                            android:id="@+id/btnWeeklyShifts"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_marginBottom="8dp"
-                                android:src="@android:drawable/ic_menu_week"
-                                app:tint="@color/secondary_turquoise" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@string/weekly_shifts"
-                                android:textColor="@color/text_primary"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
+                    android:nestedScrollingEnabled="false"
+                    tools:itemCount="6"
+                    tools:listitem="@layout/item_action_card" />
 
             </LinearLayout>
 
@@ -311,4 +108,3 @@
     </LinearLayout>
 
 </ScrollView>
-

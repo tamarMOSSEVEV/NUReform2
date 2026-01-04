@@ -2,7 +2,6 @@ package com.example.nureform.data.repository
 
 import com.example.nureform.data.model.User
 import com.example.nureform.data.model.UserRole
-import com.example.nureform.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await

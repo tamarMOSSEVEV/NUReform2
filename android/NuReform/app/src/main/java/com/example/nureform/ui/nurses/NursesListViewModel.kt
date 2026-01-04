@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class NursesListViewModel(private val nursesRepository: NursesRepository) : ViewModel() {
+class NursesListViewModel(
+    private val nursesRepository: NursesRepository) : ViewModel() {
 
     private val _nursesListState = MutableStateFlow<NursesListState>(NursesListState.Idle)
     val nursesListState: StateFlow<NursesListState> = _nursesListState.asStateFlow()

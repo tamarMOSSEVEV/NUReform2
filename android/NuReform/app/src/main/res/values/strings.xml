@@ -21,9 +21,13 @@
     <!-- Manager Menu Buttons -->
     <string name="add_nurses">הוספת אחיות</string>
     <string name="nurses_details">פרטים של כל אחות</string>
-    <string name="nurses_requests">בקשות אחיות מהשיבוץ</string>
+    <string name="nurses_requests">בקשות שיבוץ של האחיות</string>
     <string name="delete_nurse">מחיקת אחות</string>
     <string name="weekly_shifts">משמרות של האחיות השבוע</string>
+    <string name="choose_weekly_shifts">בחירת משמרות שבועיות</string>
+    <string name="my_schedule">השיבוץ שלי</string>
+    <string name="all_nurses_schedule">השיבוצים של כל האחיות</string>
+    <string name="run_scheduling">הרץ שיבוץ אחיות</string>
 
     <!-- Common -->
     <string name="hello">שלום</string>
@@ -41,6 +45,7 @@
     <string name="name">שם</string>
     <string name="phone">טלפון</string>
     <string name="add_nurse_button">הוסף אחות</string>
+    <string name="add">הוסף</string>
 
     <!-- Delete Nurse Screen -->
     <string name="check_nurse">בדוק אחות</string>

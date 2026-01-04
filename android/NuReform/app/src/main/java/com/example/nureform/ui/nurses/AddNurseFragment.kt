@@ -13,7 +13,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AddNurseFragment : BaseFragment<FragmentAddNurseBinding>(
     FragmentAddNurseBinding::inflate
 ) {
-
     private val viewModel: AddNurseViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,7 +59,7 @@ class AddNurseFragment : BaseFragment<FragmentAddNurseBinding>(
                 idNumber = idNumber,
                 name = name,
                 phone = phone,
-                email = email,
+                email = email
             )
         }
 

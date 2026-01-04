@@ -34,10 +34,15 @@ class AddNurseViewModel(
                     email = email
                 )
 
-                val result = nursesRepository.addNurse(nurse)
+                // Use idNumber as password
+                val result = nursesRepository.addNurse(
+                    nurse = nurse,
+                    password = idNumber,
+                )
 
                 if (result.isSuccess) {
-                    _addNurseState.value = AddNurseState.Success(nurse, "האחות נוספה בהצלחה")
+                    _addNurseState.value =
+                        AddNurseState.Success(result.getOrThrow(), "האחות נוספה בהצלחה")
                 } else {
                     _addNurseState.value = AddNurseState.Error(
                         result.exceptionOrNull()?.message ?: "שגיאה בהוספת אחות"
@@ -106,4 +111,5 @@ class AddNurseViewModel(
         _addNurseState.value = AddNurseState.Idle
     }
 }
+
 

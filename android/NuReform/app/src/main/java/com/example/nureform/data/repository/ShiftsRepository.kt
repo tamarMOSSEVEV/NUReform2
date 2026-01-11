@@ -5,10 +5,12 @@ import kotlinx.coroutines.tasks.await
 import java.util.Calendar
 
 const val WEEKLY_SHIFTS_SUBCOLLECTION = "weekly_shifts"
+const val FINALIZED_SHIFTS_COLLECTION = "shifts"
 
 class ShiftsRepository {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val nursesCollection = firestore.collection("nurses")
+    private val shiftsCollection = firestore.collection(FINALIZED_SHIFTS_COLLECTION)
 
     fun getCurrentWeekNumber(): Int {
         val calendar = Calendar.getInstance()
@@ -44,6 +46,24 @@ class ShiftsRepository {
             val document = nursesCollection
                 .document(nurseId)
                 .collection(WEEKLY_SHIFTS_SUBCOLLECTION)
+                .document(documentId)
+                .get()
+                .await()
+
+            Result.success(document.exists())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun areShiftsFinalized(): Result<Boolean> {
+        return try {
+            val weekNumber = getCurrentWeekNumber()
+            val year = getCurrentYear()
+            val documentId = "${year}_${weekNumber}"
+
+            // Check if the finalized shifts document exists
+            val document = shiftsCollection
                 .document(documentId)
                 .get()
                 .await()

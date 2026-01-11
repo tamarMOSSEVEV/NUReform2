@@ -96,6 +96,25 @@ class ChooseShiftsFragment : BaseFragment<FragmentChooseShiftsBinding>(
                 binding.tvWeekInfo.text = weekInfo
             }
         }
+
+        // Observe existing shifts and pre-populate checkboxes
+        lifecycleScope.launch {
+            viewModel.existingShifts.collect { existingShifts ->
+                populateExistingShifts(existingShifts)
+            }
+        }
+    }
+
+    private fun populateExistingShifts(shifts: Map<String, List<String>>) {
+        if (shifts.isEmpty()) return
+
+        shifts.forEach { (day, selectedShifts) ->
+            dayViewsMap[day]?.let { views ->
+                views.cbMorning.isChecked = selectedShifts.contains(ShiftConstants.SHIFT_MORNING)
+                views.cbNoon.isChecked = selectedShifts.contains(ShiftConstants.SHIFT_NOON)
+                views.cbEvening.isChecked = selectedShifts.contains(ShiftConstants.SHIFT_EVENING)
+            }
+        }
     }
 
     private fun setupClickListeners() {

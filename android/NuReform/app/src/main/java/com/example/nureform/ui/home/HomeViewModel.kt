@@ -42,18 +42,19 @@ class HomeViewModel(
     }
 
     suspend fun canSubmitShifts(nurseId: String): ShiftSubmissionStatus {
+        // Check if shifts are already finalized by manager
+        val finalizedResult = shiftsRepository.areShiftsFinalized()
+        if (finalizedResult.isSuccess && finalizedResult.getOrNull() == true) {
+            return ShiftSubmissionStatus.ShiftsFinalized
+        }
+
         // Check if submission window is open
         if (!shiftsRepository.isSubmissionWindowOpen()) {
             return ShiftSubmissionStatus.WindowClosed
         }
 
-        // Check if already submitted
-        val result = shiftsRepository.hasSubmittedForCurrentWeek(nurseId)
-        return if (result.isSuccess && result.getOrNull() == true) {
-            ShiftSubmissionStatus.AlreadySubmitted
-        } else {
-            ShiftSubmissionStatus.CanSubmit
-        }
+        // If window is open and shifts not finalized, allow submission/editing
+        return ShiftSubmissionStatus.CanSubmit
     }
 
     fun logout() {
@@ -65,5 +66,6 @@ sealed class ShiftSubmissionStatus {
     object CanSubmit : ShiftSubmissionStatus()
     object WindowClosed : ShiftSubmissionStatus()
     object AlreadySubmitted : ShiftSubmissionStatus()
+    object ShiftsFinalized : ShiftSubmissionStatus()
 }
 

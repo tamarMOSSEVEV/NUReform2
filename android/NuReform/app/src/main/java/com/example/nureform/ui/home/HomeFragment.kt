@@ -181,6 +181,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     lifecycleScope.launch {
                         when (viewModel.canSubmitShifts(nurseId)) {
                             is ShiftSubmissionStatus.CanSubmit -> {
+                                // Navigate to shift selection screen
+                                // User can submit new shifts or edit existing ones
                                 findNavController().navigate(R.id.action_homeFragment_to_chooseShiftsFragment)
                             }
                             is ShiftSubmissionStatus.WindowClosed -> {
@@ -190,12 +192,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
-                            is ShiftSubmissionStatus.AlreadySubmitted -> {
+                            is ShiftSubmissionStatus.ShiftsFinalized -> {
                                 Toast.makeText(
                                     requireContext(),
-                                    "כבר בחרת משמרות לשבוע זה",
+                                    "משמרות חולקו, אין אפשרות לשנות",
                                     Toast.LENGTH_LONG
                                 ).show()
+                            }
+                            is ShiftSubmissionStatus.AlreadySubmitted -> {
+                                // This status is no longer used, but kept for compatibility
+                                findNavController().navigate(R.id.action_homeFragment_to_chooseShiftsFragment)
                             }
                         }
                     }

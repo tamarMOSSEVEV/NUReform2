@@ -141,7 +141,7 @@ class NursesRepository {
 
     suspend fun updateNurse(nurse: Nurse): Result<Nurse> {
         return try {
-            // Use userIgd as the document ID
+            // Use userId as the document ID
             if (nurse.userId.isEmpty()) {
                 return Result.failure(Exception("מזהה משתמש חסר"))
             }

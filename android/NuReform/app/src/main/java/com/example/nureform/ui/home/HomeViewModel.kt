@@ -42,7 +42,6 @@ class HomeViewModel(
     }
 
     suspend fun canSubmitShifts(nurseId: String): ShiftSubmissionStatus {
-        // Check if shifts are already finalized by manager
         val finalizedResult = shiftsRepository.areShiftsFinalized()
         if (finalizedResult.isSuccess && finalizedResult.getOrNull() == true) {
             return ShiftSubmissionStatus.ShiftsFinalized

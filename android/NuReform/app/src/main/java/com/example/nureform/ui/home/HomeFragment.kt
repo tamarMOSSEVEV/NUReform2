@@ -172,8 +172,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 Toast.makeText(requireContext(), "בקרוב...", Toast.LENGTH_SHORT).show()
             }
             ActionCardType.RUN_SCHEDULING -> {
-                // TODO: Navigate to run scheduling screen
-                Toast.makeText(requireContext(), "בקרוב...", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_homeFragment_to_runSchedulingFragment)
             }
             ActionCardType.CHOOSE_SHIFTS -> {
                 val nurseId = FirebaseAuth.getInstance().currentUser?.uid

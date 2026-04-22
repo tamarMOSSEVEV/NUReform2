@@ -2,6 +2,7 @@ package com.example.nureform.di
 
 import com.example.nureform.data.repository.AuthRepository
 import com.example.nureform.data.repository.NursesRepository
+import com.example.nureform.data.repository.SchedulingRepository
 import com.example.nureform.data.repository.ShiftsRepository
 import com.example.nureform.ui.AppCoroutineScope
 import com.example.nureform.ui.auth.LoginViewModel
@@ -11,6 +12,7 @@ import com.example.nureform.ui.nurses.DeleteNurseViewModel
 import com.example.nureform.ui.nurses.NursesListViewModel
 import com.example.nureform.ui.nursesrequests.NursesRequestsViewModel
 import com.example.nureform.ui.schedule.ScheduleViewModel
+import com.example.nureform.ui.scheduling.RunSchedulingViewModel
 import com.example.nureform.ui.shifts.ChooseShiftsViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.*
@@ -24,6 +26,7 @@ val appModule = module {
     single { AuthRepository() }
     single { NursesRepository() }
     single { ShiftsRepository() }
+    single { SchedulingRepository() }
 
     // ViewModels
     viewModel { LoginViewModel(androidApplication(), get()) }
@@ -34,5 +37,6 @@ val appModule = module {
     viewModel { ChooseShiftsViewModel(get()) }
     viewModel { ScheduleViewModel(get()) }
     viewModel { NursesRequestsViewModel(get()) }
+    viewModel { RunSchedulingViewModel(get(), get()) }
 }
 

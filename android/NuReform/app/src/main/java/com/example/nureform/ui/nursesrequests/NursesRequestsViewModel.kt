@@ -18,8 +18,8 @@ class NursesRequestsViewModel(
                 val result = shiftsRepository.getAllNursesShiftRequests()
                 if (result.isSuccess) {
                     val requests = result.getOrNull() ?: emptyList()
-                    val weekNumber = shiftsRepository.getCurrentWeekNumber()
-                    val year = shiftsRepository.getCurrentYear()
+                    val weekNumber = shiftsRepository.getNextWeekNumber()
+                    val year = shiftsRepository.getNextWeekYear()
                     val weekInfo = "שבוע $weekNumber, $year"
                     _state.value = NursesRequestsState.Success(requests, weekInfo)
                 } else {

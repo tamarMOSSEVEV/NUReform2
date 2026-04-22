@@ -7,6 +7,6 @@ sealed class ScheduleViewState {
     object Loading : ScheduleViewState()
     data class Success(val schedules: List<NurseSchedule>) : ScheduleViewState()
     object Empty : ScheduleViewState()
+    object Running : ScheduleViewState()
     data class Error(val message: String) : ScheduleViewState()
 }
-

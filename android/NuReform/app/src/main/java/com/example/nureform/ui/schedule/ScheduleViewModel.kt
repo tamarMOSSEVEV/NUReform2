@@ -9,93 +9,101 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+data class WeekScheduleData(
+    val weekLabel: String,
+    val weekDocId: String,
+    val status: String?,          // null, "running", "success", "error"
+    val schedules: List<NurseSchedule>
+)
+
 class ScheduleViewModel(
     private val shiftsRepository: ShiftsRepository
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<ScheduleViewState>(ScheduleViewState.Idle)
-    val state: StateFlow<ScheduleViewState> = _state.asStateFlow()
+    private val _currentWeekState = MutableStateFlow<ScheduleViewState>(ScheduleViewState.Idle)
+    val currentWeekState: StateFlow<ScheduleViewState> = _currentWeekState.asStateFlow()
 
-    private val _weekInfo = MutableStateFlow("")
-    val weekInfo: StateFlow<String> = _weekInfo.asStateFlow()
+    private val _nextWeekState = MutableStateFlow<ScheduleViewState>(ScheduleViewState.Idle)
+    val nextWeekState: StateFlow<ScheduleViewState> = _nextWeekState.asStateFlow()
 
     private val _title = MutableStateFlow("")
     val title: StateFlow<String> = _title.asStateFlow()
 
+    private val _currentWeekLabel = MutableStateFlow("")
+    val currentWeekLabel: StateFlow<String> = _currentWeekLabel.asStateFlow()
+
+    private val _nextWeekLabel = MutableStateFlow("")
+    val nextWeekLabel: StateFlow<String> = _nextWeekLabel.asStateFlow()
+
+    private var isAllNurses = true
+    private var nurseName: String? = null
+
     fun loadSchedule(isAllNurses: Boolean, currentNurseName: String? = null) {
-        val weekNumber = shiftsRepository.getCurrentWeekNumber()
-        val year = shiftsRepository.getCurrentYear()
-        _weekInfo.value = "שבוע $weekNumber, $year"
+        this.isAllNurses = isAllNurses
+        this.nurseName = currentNurseName
         _title.value = if (isAllNurses) "השיבוצים של כל האחיות" else "השיבוץ שלי"
 
-        _state.value = ScheduleViewState.Loading
+        val currentWeekNum = shiftsRepository.getCurrentWeekNumber()
+        val currentYear = shiftsRepository.getCurrentYear()
+        val currentDocId = "${currentYear}_${currentWeekNum}"
+        _currentWeekLabel.value = "שבוע $currentWeekNum, $currentYear"
+
+        val nextWeekNum = shiftsRepository.getNextWeekNumber()
+        val nextYear = shiftsRepository.getNextWeekYear()
+        val nextDocId = "${nextYear}_${nextWeekNum}"
+        _nextWeekLabel.value = "שבוע $nextWeekNum, $nextYear"
+
+        loadWeek(currentDocId, _currentWeekState)
+        loadWeek(nextDocId, _nextWeekState)
+    }
+
+    private fun loadWeek(weekDocId: String, stateFlow: MutableStateFlow<ScheduleViewState>) {
+        stateFlow.value = ScheduleViewState.Loading
 
         viewModelScope.launch {
             try {
-                // TODO: Replace with real data from repository
-                val mockSchedules = getMockSchedules(isAllNurses, currentNurseName)
+                // Check status first
+                val status = shiftsRepository.getWeekStatus(weekDocId)
 
-                if (mockSchedules.isEmpty()) {
-                    _state.value = ScheduleViewState.Empty
-                } else {
-                    _state.value = ScheduleViewState.Success(mockSchedules)
+                when (status) {
+                    "running" -> {
+                        stateFlow.value = ScheduleViewState.Running
+                        return@launch
+                    }
+                    "error" -> {
+                        stateFlow.value = ScheduleViewState.Error("שגיאה בשיבוץ")
+                        return@launch
+                    }
+                    "success" -> {
+                        val result = shiftsRepository.getScheduleForWeek(weekDocId)
+                        if (result.isFailure) {
+                            stateFlow.value = ScheduleViewState.Error(
+                                result.exceptionOrNull()?.message ?: "שגיאה בטעינת נתונים"
+                            )
+                            return@launch
+                        }
+
+                        val schedules = result.getOrDefault(emptyList())
+                        val filtered = if (isAllNurses) {
+                            schedules
+                        } else {
+                            schedules.filter { it.nurseName == nurseName }
+                        }
+
+                        if (filtered.isEmpty()) {
+                            stateFlow.value = ScheduleViewState.Empty
+                        } else {
+                            stateFlow.value = ScheduleViewState.Success(filtered)
+                        }
+                    }
+                    else -> {
+                        // No doc exists
+                        stateFlow.value = ScheduleViewState.Empty
+                    }
                 }
             } catch (e: Exception) {
-                _state.value = ScheduleViewState.Error(e.message ?: "שגיאה בטעינת נתונים")
+                stateFlow.value = ScheduleViewState.Error(e.message ?: "שגיאה לא צפויה")
             }
         }
     }
-
-    private fun getMockSchedules(isAllNurses: Boolean, currentNurseName: String?): List<NurseSchedule> {
-        return if (isAllNurses) {
-            // Mock data for all nurses
-            listOf(
-                NurseSchedule(
-                    nurseName = "שרה כהן",
-                    sunday = "בוקר",
-                    monday = "צהריים",
-                    tuesday = "X",
-                    wednesday = "בוקר, ערב",
-                    thursday = "X",
-                    friday = "בוקר",
-                    saturday = "X"
-                ),
-                NurseSchedule(
-                    nurseName = "רחל לוי",
-                    sunday = "צהריים",
-                    monday = "ערב",
-                    tuesday = "בוקר",
-                    wednesday = "X",
-                    thursday = "צהריים",
-                    friday = "X",
-                    saturday = "ערב"
-                ),
-                NurseSchedule(
-                    nurseName = "מרים גולן",
-                    sunday = "X",
-                    monday = "בוקר",
-                    tuesday = "צהריים, ערב",
-                    wednesday = "בוקר",
-                    thursday = "X",
-                    friday = "צהריים",
-                    saturday = "בוקר"
-                )
-            )
-        } else {
-            // Mock data for current nurse only
-            listOf(
-                NurseSchedule(
-                    nurseName = currentNurseName ?: "אחות נוכחית",
-                    sunday = "בוקר",
-                    monday = "צהריים",
-                    tuesday = "X",
-                    wednesday = "בוקר, ערב",
-                    thursday = "X",
-                    friday = "בוקר",
-                    saturday = "X"
-                )
-            )
-        }
-    }
 }
-

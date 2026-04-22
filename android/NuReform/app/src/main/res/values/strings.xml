@@ -28,6 +28,7 @@
     <string name="my_schedule">השיבוץ שלי</string>
     <string name="all_nurses_schedule">השיבוצים של כל האחיות</string>
     <string name="run_scheduling">הרץ שיבוץ אחיות</string>
+    <string name="run_scheduling_button">הרץ שיבוץ</string>
 
     <!-- Common -->
     <string name="hello">שלום</string>
@@ -35,6 +36,9 @@
     <string name="nurse">אחות</string>
     <string name="back">חזור</string>
     <string name="refresh">רענן</string>
+    <string name="download_pdf">הורד PDF</string>
+    <string name="pdf_saved">PDF נשמר בהצלחה</string>
+    <string name="pdf_error">שגיאה ביצירת PDF</string>
 
     <!-- Nurses List Screen -->
     <string name="no_nurses_found">לא נמצאו אחיות</string>
@@ -46,6 +50,7 @@
     <string name="phone">טלפון</string>
     <string name="add_nurse_button">הוסף אחות</string>
     <string name="add">הוסף</string>
+    <string name="job_percentage">אחוז משרה</string>
 
     <!-- Delete Nurse Screen -->
     <string name="check_nurse">בדוק אחות</string>

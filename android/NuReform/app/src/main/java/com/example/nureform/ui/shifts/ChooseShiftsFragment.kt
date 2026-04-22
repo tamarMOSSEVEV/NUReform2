@@ -82,6 +82,12 @@ class ChooseShiftsFragment : BaseFragment<FragmentChooseShiftsBinding>(
                         Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
                     }
 
+                    is ChooseShiftsState.SchedulingInProgress -> {
+                        showLoading(false)
+                        enableForm(false)
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                    }
+
                     is ChooseShiftsState.WindowClosed -> {
                         showLoading(false)
                         enableForm(false)

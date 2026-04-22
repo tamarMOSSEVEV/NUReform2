@@ -17,7 +17,7 @@ class AddNurseViewModel(
     private val _addNurseState = MutableStateFlow<AddNurseState>(AddNurseState.Idle)
     val addNurseState: StateFlow<AddNurseState> = _addNurseState.asStateFlow()
 
-    fun addNurse(idNumber: String, name: String, phone: String, email: String) {
+    fun addNurse(idNumber: String, name: String, phone: String, email: String, jobPercentage: Int = 100) {
         // Validate inputs
         if (!validateInputs(idNumber, name, phone, email)) {
             return
@@ -31,7 +31,8 @@ class AddNurseViewModel(
                     idNumber = idNumber,
                     name = name,
                     phone = phone,
-                    email = email
+                    email = email,
+                    jobPercentage = jobPercentage
                 )
 
                 // Use idNumber as password

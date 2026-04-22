@@ -43,9 +43,16 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
-22        <action
+        <action
             android:id="@+id/action_homeFragment_to_nursesRequestsFragment"
             app:destination="@id/nursesRequestsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_runSchedulingFragment"
+            app:destination="@id/runSchedulingFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -72,9 +79,9 @@
 
         <argument
             android:name="user"
+            android:defaultValue="@null"
             app:argType="com.example.nureform.data.model.User"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -91,14 +98,14 @@
 
         <argument
             android:name="showAllNurses"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
 
         <argument
             android:name="nurseName"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -106,6 +113,12 @@
         android:name="com.example.nureform.ui.nursesrequests.NursesRequestsFragment"
         android:label="@string/nurses_requests"
         tools:layout="@layout/fragment_nurses_requests" />
+
+    <fragment
+        android:id="@+id/runSchedulingFragment"
+        android:name="com.example.nureform.ui.scheduling.RunSchedulingFragment"
+        android:label="@string/run_scheduling"
+        tools:layout="@layout/fragment_run_scheduling" />
 
 </navigation>
 

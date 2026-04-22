@@ -3,6 +3,7 @@ package com.example.nureform.ui.nursesrequests
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nureform.databinding.FragmentNursesRequestsBinding
 import com.example.nureform.ui.BaseFragment
@@ -19,7 +20,14 @@ class NursesRequestsFragment : BaseFragment<FragmentNursesRequestsBinding>(
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
+        setupClickListeners()
         viewModel.loadNursesRequests()
+    }
+
+    private fun setupClickListeners() {
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setupRecyclerView() {

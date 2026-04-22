@@ -6,6 +6,7 @@ data class Nurse(
     val phone: String = "",
     val email: String = "",
     val userId: String = "", // Firebase Auth UID
+    val jobPercentage: Int = 100,
     val createdAt: Long = System.currentTimeMillis()
 )
 

@@ -5,5 +5,6 @@ sealed class ChooseShiftsState {
     data class Success(val message: String) : ChooseShiftsState()
     data class Error(val message: String) : ChooseShiftsState()
     data class AlreadySubmitted(val message: String) : ChooseShiftsState()
+    data class SchedulingInProgress(val message: String) : ChooseShiftsState()
     data class WindowClosed(val message: String) : ChooseShiftsState()
 }

@@ -34,6 +34,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
 
+            <ImageButton
+                android:id="@+id/btnDownloadPdf"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circular_button_background"
+                android:contentDescription="@string/download_pdf"
+                android:padding="12dp"
+                android:src="@android:drawable/stat_sys_download"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white"
+                tools:visibility="visible" />
+
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="0dp"
@@ -48,28 +62,53 @@
                 app:layout_constraintTop_toBottomOf="@id/btnBack"
                 tools:text="השיבוץ שלי" />
 
-            <TextView
-                android:id="@+id/tvWeekInfo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="start"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
-                tools:text="שבוע 1, 2026" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- Tab buttons for current/next week -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/primary_dark_blue"
+            app:tabTextColor="@color/text_secondary"
+            app:tabIndicatorColor="@color/primary_dark_blue">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="השבוע" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="שבוע הבא" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- Week info label -->
+        <TextView
+            android:id="@+id/tvWeekInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="8dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            tools:text="שבוע 17, 2026" />
+
+        <!-- Schedule content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="20dp">
 
             <HorizontalScrollView
+                android:id="@+id/scheduleScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal">
@@ -80,6 +119,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/tableHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -198,9 +238,21 @@
                 android:textSize="16sp"
                 android:visibility="gone" />
 
+            <!-- Running state -->
+            <TextView
+                android:id="@+id/tvRunningState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:text="השיבוץ מתבצע כעת..."
+                android:textColor="@color/primary_dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
         </LinearLayout>
 
     </LinearLayout>
 
 </ScrollView>
-

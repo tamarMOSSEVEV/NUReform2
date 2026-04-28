@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
     // For Android Emulator: use "http://10.0.2.2:5000/"
     // For physical device: use your computer's IP
-    private const val BASE_URL = "http://192.168.68.64:3001/"
+    private const val BASE_URL = "http://91.98.158.203:3001/"
+
 
     private val gson: Gson = GsonBuilder().create()
 

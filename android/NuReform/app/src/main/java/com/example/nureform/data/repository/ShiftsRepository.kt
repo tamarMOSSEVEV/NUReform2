@@ -254,21 +254,65 @@ class ShiftsRepository {
                 return Result.success(emptyList())
             }
 
+            // Build a name -> jobPercentage lookup from the nurses collection
+            val nursesSnapshot = nursesCollection.get().await()
+            val jobPctByName: Map<String, Int> = nursesSnapshot.documents
+                .associate { doc ->
+                    val name = doc.getString("name") ?: ""
+                    val pct = (doc.getLong("jobPercentage") ?: 100L).toInt()
+                    name to pct
+                }
+
             val assignments = document.get("assignments") as? List<Map<String, Any>> ?: emptyList()
             val schedules = assignments.map { assignment ->
+                val nurseName = assignment["nurseName"] as? String ?: ""
                 NurseSchedule(
-                    nurseName = assignment["nurseName"] as? String ?: "",
+                    nurseName = nurseName,
                     sunday = assignment["sunday"] as? String ?: "X",
                     monday = assignment["monday"] as? String ?: "X",
                     tuesday = assignment["tuesday"] as? String ?: "X",
                     wednesday = assignment["wednesday"] as? String ?: "X",
                     thursday = assignment["thursday"] as? String ?: "X",
                     friday = assignment["friday"] as? String ?: "X",
-                    saturday = assignment["saturday"] as? String ?: "X"
+                    saturday = assignment["saturday"] as? String ?: "X",
+                    jobPercentage = jobPctByName[nurseName] ?: 100
                 )
             }
 
             Result.success(schedules)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * Overwrites the assignments array in an existing nurses_shifts/{weekDocId} document.
+     * Called when a manager edits the finalized schedule.
+     */
+    suspend fun updateScheduleAssignments(
+        weekDocId: String,
+        schedules: List<NurseSchedule>
+    ): Result<Unit> {
+        return try {
+            val assignments = schedules.map { s ->
+                mapOf(
+                    "nurseName" to s.nurseName,
+                    "sunday" to s.sunday,
+                    "monday" to s.monday,
+                    "tuesday" to s.tuesday,
+                    "wednesday" to s.wednesday,
+                    "thursday" to s.thursday,
+                    "friday" to s.friday,
+                    "saturday" to s.saturday
+                )
+            }
+            shiftsCollection.document(weekDocId).update(
+                mapOf(
+                    "assignments" to assignments,
+                    "lastEditedAt" to System.currentTimeMillis()
+                )
+            ).await()
+            Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }

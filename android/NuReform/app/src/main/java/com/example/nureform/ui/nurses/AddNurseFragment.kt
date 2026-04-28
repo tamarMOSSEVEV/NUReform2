@@ -66,6 +66,7 @@ class AddNurseFragment : BaseFragment<FragmentAddNurseBinding>(
             val name = binding.etName.text.toString().trim()
             val phone = binding.etPhone.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString()
             val selectedIndex = jobPercentageOptions.indexOf(binding.actvJobPercentage.text.toString())
             val jobPercentage = if (selectedIndex >= 0) jobPercentageValues[selectedIndex] else 100
 
@@ -74,6 +75,7 @@ class AddNurseFragment : BaseFragment<FragmentAddNurseBinding>(
                 name = name,
                 phone = phone,
                 email = email,
+                password = password,
                 jobPercentage = jobPercentage
             )
         }
@@ -90,6 +92,7 @@ class AddNurseFragment : BaseFragment<FragmentAddNurseBinding>(
         binding.etName.isEnabled = !isLoading
         binding.etPhone.isEnabled = !isLoading
         binding.etEmail.isEnabled = !isLoading
+        binding.etPassword.isEnabled = !isLoading
         binding.actvJobPercentage.isEnabled = !isLoading
     }
 
@@ -99,6 +102,7 @@ class AddNurseFragment : BaseFragment<FragmentAddNurseBinding>(
         binding.tilName.error = null
         binding.tilPhone.error = null
         binding.tilEmail.error = null
+        binding.tilPassword.error = null
 
         // Set error on specific field
         when (field) {
@@ -106,6 +110,7 @@ class AddNurseFragment : BaseFragment<FragmentAddNurseBinding>(
             "name" -> binding.tilName.error = message
             "phone" -> binding.tilPhone.error = message
             "email" -> binding.tilEmail.error = message
+            "password" -> binding.tilPassword.error = message
             else -> Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
         }
     }

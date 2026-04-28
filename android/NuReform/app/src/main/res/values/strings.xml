@@ -51,12 +51,32 @@
     <string name="add_nurse_button">הוסף אחות</string>
     <string name="add">הוסף</string>
     <string name="job_percentage">אחוז משרה</string>
+    <string name="nurse_password">סיסמה לאחות</string>
 
     <!-- Delete Nurse Screen -->
     <string name="check_nurse">בדוק אחות</string>
     <string name="delete_warning">אזהרה: מחיקת אחות היא פעולה בלתי הפיכה. אנא ודא שהזנת תעודת זהות נכונה.</string>
 
-    <!-- Errors -->
+    <!-- Schedule Edit -->
+    <string name="edit_schedule">עריכת שיבוץ</string>
+    <string name="update_schedule">עדכן</string>
+    <string name="cancel">ביטול</string>
+    <string name="schedule_updated">השיבוץ עודכן בהצלחה</string>
+    <string name="schedule_update_error">שגיאה בעדכון השיבוץ</string>
+    <string name="unsaved_changes">*שינויים לא שמורים</string>
+    <string name="no_shift">X (ללא משמרת)</string>
+
+    <!-- Daily Summary -->
+    <string name="daily_summary">סיכום יומי</string>
+    <string name="morning_shift">בוקר</string>
+    <string name="noon_shift">צהריים</string>
+    <string name="evening_shift">ערב</string>
+    <string name="no_nurses_assigned">—</string>
+
+    <!-- PDF Header -->
+    <string name="pdf_generated_on">נוצר ב:</string>
+    <string name="pdf_total_nurses">סה״כ אחיות:</string>
+    <string name="pdf_week_range">תאריכים:</string>
     <string name="error_email_required">אימייל נדרש</string>
     <string name="error_password_required">סיסמה נדרשת</string>
     <string name="error_password_length">הסיסמה חייבת להכיל לפחות 6 תווים</string>

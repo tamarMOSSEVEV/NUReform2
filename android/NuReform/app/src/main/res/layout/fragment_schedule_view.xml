@@ -34,6 +34,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
 
+            <!-- Manager-only edit button (shown when schedule is loaded, not in edit mode) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditSchedule"
+                style="@style/Widget.NuReform.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/edit_schedule"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:cornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
             <ImageButton
                 android:id="@+id/btnDownloadPdf"
                 android:layout_width="48dp"
@@ -43,9 +57,38 @@
                 android:padding="12dp"
                 android:src="@android:drawable/stat_sys_download"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnEditSchedule"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white"
+                tools:visibility="visible" />
+
+            <!-- Manager-only edit action buttons -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdate"
+                style="@style/Widget.NuReform.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/update_schedule"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:cornerRadius="8dp"
+                app:layout_constraintEnd_toStartOf="@id/btnCancelEdit"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelEdit"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/cancel"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:cornerRadius="8dp"
+                app:strokeColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />
 
             <TextView
@@ -137,9 +180,21 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="48dp"
                             android:gravity="center"
+                            android:padding="8dp"
+                            android:text="אחוז משרה"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvHeaderSunday"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:minHeight="48dp"
                             android:padding="8dp"
                             android:text="יום ראשון"
                             android:textColor="@color/white"
@@ -147,9 +202,11 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvHeaderMonday"
                             android:layout_width="100dp"
-                            android:layout_height="48dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:minHeight="48dp"
                             android:padding="8dp"
                             android:text="יום שני"
                             android:textColor="@color/white"
@@ -157,9 +214,11 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvHeaderTuesday"
                             android:layout_width="100dp"
-                            android:layout_height="48dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:minHeight="48dp"
                             android:padding="8dp"
                             android:text="יום שלישי"
                             android:textColor="@color/white"
@@ -167,9 +226,11 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvHeaderWednesday"
                             android:layout_width="100dp"
-                            android:layout_height="48dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:minHeight="48dp"
                             android:padding="8dp"
                             android:text="יום רביעי"
                             android:textColor="@color/white"
@@ -177,9 +238,11 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvHeaderThursday"
                             android:layout_width="100dp"
-                            android:layout_height="48dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:minHeight="48dp"
                             android:padding="8dp"
                             android:text="יום חמישי"
                             android:textColor="@color/white"
@@ -187,9 +250,11 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvHeaderFriday"
                             android:layout_width="100dp"
-                            android:layout_height="48dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:minHeight="48dp"
                             android:padding="8dp"
                             android:text="יום שישי"
                             android:textColor="@color/white"
@@ -197,9 +262,11 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvHeaderSaturday"
                             android:layout_width="100dp"
-                            android:layout_height="48dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:minHeight="48dp"
                             android:padding="8dp"
                             android:text="יום שבת"
                             android:textColor="@color/white"

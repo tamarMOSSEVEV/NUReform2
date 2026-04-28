@@ -12,9 +12,16 @@ import kotlinx.coroutines.launch
 data class WeekScheduleData(
     val weekLabel: String,
     val weekDocId: String,
-    val status: String?,          // null, "running", "success", "error"
+    val status: String?,
     val schedules: List<NurseSchedule>
 )
+
+sealed class EditScheduleState {
+    object Idle : EditScheduleState()
+    object Loading : EditScheduleState()
+    object Success : EditScheduleState()
+    data class Error(val message: String) : EditScheduleState()
+}
 
 class ScheduleViewModel(
     private val shiftsRepository: ShiftsRepository
@@ -35,8 +42,16 @@ class ScheduleViewModel(
     private val _nextWeekLabel = MutableStateFlow("")
     val nextWeekLabel: StateFlow<String> = _nextWeekLabel.asStateFlow()
 
+    private val _editState = MutableStateFlow<EditScheduleState>(EditScheduleState.Idle)
+    val editState: StateFlow<EditScheduleState> = _editState.asStateFlow()
+
     private var isAllNurses = true
     private var nurseName: String? = null
+
+    var currentWeekDocId: String = ""
+        private set
+    var nextWeekDocId: String = ""
+        private set
 
     fun loadSchedule(isAllNurses: Boolean, currentNurseName: String? = null) {
         this.isAllNurses = isAllNurses
@@ -45,16 +60,16 @@ class ScheduleViewModel(
 
         val currentWeekNum = shiftsRepository.getCurrentWeekNumber()
         val currentYear = shiftsRepository.getCurrentYear()
-        val currentDocId = "${currentYear}_${currentWeekNum}"
+        currentWeekDocId = "${currentYear}_${currentWeekNum}"
         _currentWeekLabel.value = "שבוע $currentWeekNum, $currentYear"
 
         val nextWeekNum = shiftsRepository.getNextWeekNumber()
         val nextYear = shiftsRepository.getNextWeekYear()
-        val nextDocId = "${nextYear}_${nextWeekNum}"
+        nextWeekDocId = "${nextYear}_${nextWeekNum}"
         _nextWeekLabel.value = "שבוע $nextWeekNum, $nextYear"
 
-        loadWeek(currentDocId, _currentWeekState)
-        loadWeek(nextDocId, _nextWeekState)
+        loadWeek(currentWeekDocId, _currentWeekState)
+        loadWeek(nextWeekDocId, _nextWeekState)
     }
 
     private fun loadWeek(weekDocId: String, stateFlow: MutableStateFlow<ScheduleViewState>) {
@@ -62,7 +77,6 @@ class ScheduleViewModel(
 
         viewModelScope.launch {
             try {
-                // Check status first
                 val status = shiftsRepository.getWeekStatus(weekDocId)
 
                 when (status) {
@@ -97,12 +111,23 @@ class ScheduleViewModel(
                         }
                     }
                     else -> {
-                        // No doc exists
                         stateFlow.value = ScheduleViewState.Empty
                     }
                 }
             } catch (e: Exception) {
                 stateFlow.value = ScheduleViewState.Error(e.message ?: "שגיאה לא צפויה")
+            }
+        }
+    }
+
+    fun saveEditedSchedule(weekDocId: String, schedules: List<NurseSchedule>) {
+        _editState.value = EditScheduleState.Loading
+        viewModelScope.launch {
+            val result = shiftsRepository.updateScheduleAssignments(weekDocId, schedules)
+            _editState.value = if (result.isSuccess) {
+                EditScheduleState.Success
+            } else {
+                EditScheduleState.Error(result.exceptionOrNull()?.message ?: "שגיאה בעדכון")
             }
         }
     }

@@ -10,8 +10,8 @@ from flask import Flask, jsonify
 from algorithm import Nurse, QuotaRequirement, run_vns
 
 # ── Algorithm Configuration ─────────────────────────────────────────
-VNS_MAX_ITERATIONS = 200
-VNS_SEED = 42
+VNS_MAX_ITERATIONS = 700
+VNS_SEED = 8787631
 VNS_MULTI_START_RUNS = 1
 
 # ── Shift Quota (min nurses per shift per day) ──────────────────────

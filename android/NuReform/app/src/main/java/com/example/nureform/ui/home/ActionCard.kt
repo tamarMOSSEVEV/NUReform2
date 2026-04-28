@@ -20,6 +20,7 @@ enum class ActionCardType {
     CHOOSE_SHIFTS,
     MY_SCHEDULE,
     ALL_NURSES_SCHEDULE,
-    RUN_SCHEDULING
+    RUN_SCHEDULING,
+    DAILY_SUMMARY
 }
 

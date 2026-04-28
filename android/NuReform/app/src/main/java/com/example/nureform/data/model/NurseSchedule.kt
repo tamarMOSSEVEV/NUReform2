@@ -8,6 +8,7 @@ data class NurseSchedule(
     val wednesday: String = "X",
     val thursday: String = "X",
     val friday: String = "X",
-    val saturday: String = "X"
+    val saturday: String = "X",
+    val jobPercentage: Int = 100
 )
 

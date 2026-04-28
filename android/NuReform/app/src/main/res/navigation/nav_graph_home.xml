@@ -57,6 +57,13 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_dailyScheduleFragment"
+            app:destination="@id/dailyScheduleFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -119,6 +126,12 @@
         android:name="com.example.nureform.ui.scheduling.RunSchedulingFragment"
         android:label="@string/run_scheduling"
         tools:layout="@layout/fragment_run_scheduling" />
+
+    <fragment
+        android:id="@+id/dailyScheduleFragment"
+        android:name="com.example.nureform.ui.dailyschedule.DailyScheduleFragment"
+        android:label="@string/daily_summary"
+        tools:layout="@layout/fragment_daily_schedule" />
 
 </navigation>
 

@@ -17,9 +17,9 @@ class AddNurseViewModel(
     private val _addNurseState = MutableStateFlow<AddNurseState>(AddNurseState.Idle)
     val addNurseState: StateFlow<AddNurseState> = _addNurseState.asStateFlow()
 
-    fun addNurse(idNumber: String, name: String, phone: String, email: String, jobPercentage: Int = 100) {
+    fun addNurse(idNumber: String, name: String, phone: String, email: String, password: String, jobPercentage: Int = 100) {
         // Validate inputs
-        if (!validateInputs(idNumber, name, phone, email)) {
+        if (!validateInputs(idNumber, name, phone, email, password)) {
             return
         }
 
@@ -35,10 +35,9 @@ class AddNurseViewModel(
                     jobPercentage = jobPercentage
                 )
 
-                // Use idNumber as password
                 val result = nursesRepository.addNurse(
                     nurse = nurse,
-                    password = idNumber,
+                    password = password,
                 )
 
                 if (result.isSuccess) {
@@ -59,7 +58,8 @@ class AddNurseViewModel(
         idNumber: String,
         name: String,
         phone: String,
-        email: String
+        email: String,
+        password: String
     ): Boolean {
         // Validate ID Number
         if (idNumber.isEmpty()) {
@@ -102,6 +102,17 @@ class AddNurseViewModel(
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _addNurseState.value = AddNurseState.Error("כתובת מייל לא תקינה", "email")
+            return false
+        }
+
+        // Validate Password (Firebase requires at least 6 chars)
+        if (password.isEmpty()) {
+            _addNurseState.value = AddNurseState.Error("סיסמה נדרשת", "password")
+            return false
+        }
+
+        if (password.length < 6) {
+            _addNurseState.value = AddNurseState.Error("הסיסמה חייבת להכיל לפחות 6 תווים", "password")
             return false
         }
 

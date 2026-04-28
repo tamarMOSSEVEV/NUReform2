@@ -44,6 +44,7 @@ class NursesAdapter(
 
             binding.tvPhone.text = nurse.phone
             binding.tvEmail.text = nurse.email
+            binding.tvJobPercentage.text = "אחוז משרה: ${nurse.jobPercentage}%"
         }
     }
 

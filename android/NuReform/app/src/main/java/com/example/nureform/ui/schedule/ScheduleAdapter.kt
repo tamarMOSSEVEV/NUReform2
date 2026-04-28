@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nureform.data.model.NurseSchedule
 import com.example.nureform.databinding.ItemNurseScheduleBinding
 
-class ScheduleAdapter : ListAdapter<NurseSchedule, ScheduleAdapter.ScheduleViewHolder>(ScheduleDiffCallback()) {
+class ScheduleAdapter(
+    private val onCellClick: ((rowIndex: Int, dayIndex: Int) -> Unit)? = null
+) : ListAdapter<NurseSchedule, ScheduleAdapter.ScheduleViewHolder>(ScheduleDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
         val binding = ItemNurseScheduleBinding.inflate(
@@ -16,18 +18,21 @@ class ScheduleAdapter : ListAdapter<NurseSchedule, ScheduleAdapter.ScheduleViewH
             parent,
             false
         )
-        return ScheduleViewHolder(binding)
+        return ScheduleViewHolder(binding, onCellClick)
     }
 
     override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position)
     }
 
-    class ScheduleViewHolder(private val binding: ItemNurseScheduleBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ScheduleViewHolder(
+        private val binding: ItemNurseScheduleBinding,
+        private val onCellClick: ((rowIndex: Int, dayIndex: Int) -> Unit)?
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(schedule: NurseSchedule) {
+        fun bind(schedule: NurseSchedule, rowIndex: Int) {
             binding.tvNurseName.text = schedule.nurseName
+            binding.tvJobPercentage.text = "${schedule.jobPercentage}%"
             binding.tvSunday.text = schedule.sunday
             binding.tvMonday.text = schedule.monday
             binding.tvTuesday.text = schedule.tuesday
@@ -35,6 +40,17 @@ class ScheduleAdapter : ListAdapter<NurseSchedule, ScheduleAdapter.ScheduleViewH
             binding.tvThursday.text = schedule.thursday
             binding.tvFriday.text = schedule.friday
             binding.tvSaturday.text = schedule.saturday
+
+            if (onCellClick != null) {
+                val dayViews = listOf(
+                    binding.tvSunday, binding.tvMonday, binding.tvTuesday,
+                    binding.tvWednesday, binding.tvThursday, binding.tvFriday, binding.tvSaturday
+                )
+                dayViews.forEachIndexed { dayIndex, tv ->
+                    tv.isClickable = true
+                    tv.setOnClickListener { onCellClick.invoke(rowIndex, dayIndex) }
+                }
+            }
         }
     }
 

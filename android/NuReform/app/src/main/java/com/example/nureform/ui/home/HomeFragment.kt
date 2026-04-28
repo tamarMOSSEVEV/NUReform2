@@ -111,6 +111,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 icon = android.R.drawable.ic_menu_agenda,
                 tintColor = R.color.secondary_turquoise,
                 action = ActionCardType.ALL_NURSES_SCHEDULE
+            ),
+            ActionCard(
+                id = "daily_summary",
+                title = getString(R.string.daily_summary),
+                icon = android.R.drawable.ic_menu_day,
+                tintColor = R.color.primary_dark_blue,
+                action = ActionCardType.DAILY_SUMMARY
             )
         )
         actionCardsAdapter.submitList(managerCards)
@@ -145,6 +152,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 icon = android.R.drawable.ic_menu_agenda,
                 tintColor = R.color.secondary_turquoise,
                 action = ActionCardType.ALL_NURSES_SCHEDULE
+            ),
+            ActionCard(
+                id = "daily_summary",
+                title = getString(R.string.daily_summary),
+                icon = android.R.drawable.ic_menu_day,
+                tintColor = R.color.primary_dark_blue,
+                action = ActionCardType.DAILY_SUMMARY
             )
         )
         actionCardsAdapter.submitList(nurseCards)
@@ -220,6 +234,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     nurseName = null
                 )
                 findNavController().navigate(action)
+            }
+            ActionCardType.DAILY_SUMMARY -> {
+                findNavController().navigate(R.id.action_homeFragment_to_dailyScheduleFragment)
             }
         }
     }

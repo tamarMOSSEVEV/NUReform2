@@ -18,6 +18,17 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tvJobPercentage"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="100%"
+        android:textColor="@color/text_primary"
+        android:textSize="12sp" />
+
+    <TextView
         android:id="@+id/tvSunday"
         android:layout_width="100dp"
         android:layout_height="48dp"

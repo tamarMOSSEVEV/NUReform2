@@ -11,6 +11,7 @@ import com.example.nureform.ui.nurses.AddNurseViewModel
 import com.example.nureform.ui.nurses.DeleteNurseViewModel
 import com.example.nureform.ui.nurses.NursesListViewModel
 import com.example.nureform.ui.nursesrequests.NursesRequestsViewModel
+import com.example.nureform.ui.dailyschedule.DailyScheduleViewModel
 import com.example.nureform.ui.schedule.ScheduleViewModel
 import com.example.nureform.ui.scheduling.RunSchedulingViewModel
 import com.example.nureform.ui.shifts.ChooseShiftsViewModel
@@ -36,6 +37,7 @@ val appModule = module {
     viewModel { NursesListViewModel(get()) }
     viewModel { ChooseShiftsViewModel(get()) }
     viewModel { ScheduleViewModel(get()) }
+    viewModel { DailyScheduleViewModel(get()) }
     viewModel { NursesRequestsViewModel(get()) }
     viewModel { RunSchedulingViewModel(get(), get()) }
 }

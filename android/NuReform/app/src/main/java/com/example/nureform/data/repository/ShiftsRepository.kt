@@ -1,4 +1,5 @@
 package com.example.nureform.data.repository
+
 import com.example.nureform.data.model.NurseSchedule
 import com.example.nureform.data.model.WeeklyShiftSelection
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,10 +19,15 @@ class ShiftsRepository {
 
     fun getCurrentWeekNumber(): Int {
         val calendar = Calendar.getInstance()
-        calendar.firstDayOfWeek = Calendar.SUNDAY
-        calendar.minimalDaysInFirstWeek = 1
-        return calendar.get(Calendar.WEEK_OF_YEAR)
+        // Match Python's ISO-8601 standard
+        calendar.firstDayOfWeek = Calendar.MONDAY
+        calendar.minimalDaysInFirstWeek = 4
+
+
+        val week = calendar.get(Calendar.WEEK_OF_YEAR)
+        return week
     }
+
     fun getCurrentYear(): Int {
         return Calendar.getInstance().get(Calendar.YEAR)
     }
@@ -32,29 +38,44 @@ class ShiftsRepository {
      */
     fun getNextWeekDocId(): String {
         val calendar = Calendar.getInstance()
-        calendar.firstDayOfWeek = Calendar.SUNDAY
-        calendar.minimalDaysInFirstWeek = 1
+        // Match Python's ISO-8601 standard
+        calendar.firstDayOfWeek = Calendar.MONDAY
+        calendar.minimalDaysInFirstWeek = 4
+
         calendar.add(Calendar.WEEK_OF_YEAR, 1)
         val week = calendar.get(Calendar.WEEK_OF_YEAR)
         val year = calendar.get(Calendar.YEAR)
+
+        // Format week to handle single digits (e.g., "2026_09" instead of "2026_9")
+        // Note: isocalendar() doesn't pad by default, but it's good practice.
+        // If you want exact match with your current python output, use "${year}_${week}"
         return "${year}_${week}"
     }
 
     fun getNextWeekNumber(): Int {
+
+
         val calendar = Calendar.getInstance()
-        calendar.firstDayOfWeek = Calendar.SUNDAY
-        calendar.minimalDaysInFirstWeek = 1
+        // Match Python's ISO-8601 standard
+        calendar.firstDayOfWeek = Calendar.MONDAY
+        calendar.minimalDaysInFirstWeek = 4
+
         calendar.add(Calendar.WEEK_OF_YEAR, 1)
-        return calendar.get(Calendar.WEEK_OF_YEAR)
+        val week = calendar.get(Calendar.WEEK_OF_YEAR)
+        return week
     }
 
     fun getNextWeekYear(): Int {
         val calendar = Calendar.getInstance()
-        calendar.firstDayOfWeek = Calendar.SUNDAY
-        calendar.minimalDaysInFirstWeek = 1
+        // Match Python's ISO-8601 standard
+        calendar.firstDayOfWeek = Calendar.MONDAY
+        calendar.minimalDaysInFirstWeek = 4
+
         calendar.add(Calendar.WEEK_OF_YEAR, 1)
         return calendar.get(Calendar.YEAR)
+
     }
+
     fun isSubmissionWindowOpen(): Boolean {
         // TODO: For testing - always return true. In production, enable the date checking below
         return true
@@ -70,6 +91,7 @@ class ShiftsRepository {
 //        }
 
     }
+
     suspend fun hasSubmittedForNextWeek(nurseId: String): Result<Boolean> {
         return try {
             val documentId = getNextWeekDocId()
@@ -122,6 +144,7 @@ class ShiftsRepository {
 
         awaitClose { listener.remove() }
     }
+
     suspend fun submitWeeklyShifts(
         nurseId: String,
         shifts: Map<String, List<String>>
@@ -152,6 +175,7 @@ class ShiftsRepository {
             Result.failure(e)
         }
     }
+
     suspend fun getShiftsForNextWeek(nurseId: String): Result<WeeklyShiftSelection?> {
         return try {
             val documentId = getNextWeekDocId()
@@ -181,7 +205,8 @@ class ShiftsRepository {
 
             // Get all nurses
             val nursesSnapshot = nursesCollection.get().await()
-            val nurseShiftRequests = mutableListOf<com.example.nureform.data.model.NurseShiftRequest>()
+            val nurseShiftRequests =
+                mutableListOf<com.example.nureform.data.model.NurseShiftRequest>()
 
             for (nurseDoc in nursesSnapshot.documents) {
                 val nurseId = nurseDoc.id
